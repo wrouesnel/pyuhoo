@@ -34,7 +34,7 @@ class Client(object):
         self._websession: ClientSession = websession
         self._token: Optional[str] = None
         self._refresh_token: Optional[str] = None
-        self.user_settings_temp: str = "f"  # "f" or "c"
+        # self.user_settings_temp: str = "f"  # "f" or "c"
 
         self._api: API = API(self._websession)
 
@@ -108,9 +108,9 @@ class Client(object):
             await self.refresh_token()
             data_latest = await self._api.data_latest()
 
-        # self._log.debug(f"[data_latest] returned\n{json_pp(data_latest)}")
+        #self._log.debug(f"[data_latest] returned\n{json_pp(data_latest)}")
 
-        self.user_settings_temp = data_latest["userSettings"]["temp"]
+        # self.user_settings_temp = data_latest["userSettings"]["temp"]
 
         device: dict
         for device in data_latest["devices"]:
