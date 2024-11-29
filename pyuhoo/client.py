@@ -34,7 +34,8 @@ class Client(object):
         self._websession: ClientSession = websession
         self._token: Optional[str] = None
         self._refresh_token: Optional[str] = None
-        # self.user_settings_temp: str = "f"  # "f" or "c"
+        # This *seems* to be defaulted to 'c' now.
+        self.user_settings_temp: str = "c"  # "f" or "c"
 
         self._api: API = API(self._websession)
 
@@ -110,7 +111,8 @@ class Client(object):
 
         #self._log.debug(f"[data_latest] returned\n{json_pp(data_latest)}")
 
-        # self.user_settings_temp = data_latest["userSettings"]["temp"]
+        if "temp" in data_latest.get("userSettings",{}):
+            self.user_settings_temp = data_latest["userSettings"]["temp"]
 
         device: dict
         for device in data_latest["devices"]:
